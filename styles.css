@@ -1,0 +1,257 @@
+/* ==========================================================================
+   Variables y Configuración Inicial
+   ========================================================================== */
+   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+   :root {
+       --primary-bg: #0b0f19;
+       --accent-1: #2dd4bf;
+       --accent-2: #38bdf8;
+       --glass-bg: rgba(30, 41, 59, 0.65);
+       --glass-border: rgba(255, 255, 255, 0.1);
+       --text-main: #f8fafc;
+       --text-muted: #94a3b8;
+       --font-body: 'Roboto', sans-serif;
+       --font-heading: 'Space Grotesk', sans-serif;
+       --nav-height: 70px;
+   }
+   
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+   
+   body {
+       background-color: var(--primary-bg);
+       background-image: 
+           radial-gradient(ellipse at 10% 20%, rgba(45, 212, 191, 0.15) 0%, transparent 50%),
+           radial-gradient(ellipse at 90% 80%, rgba(56, 189, 248, 0.15) 0%, transparent 50%);
+       background-attachment: fixed;
+       color: var(--text-main);
+       font-family: var(--font-body);
+       line-height: 1.6;
+       min-height: 100vh;
+   }
+   
+   h1, h2, h3 {
+       font-family: var(--font-heading);
+       font-weight: 700;
+   }
+   
+   .container {
+       max-width: 1100px;
+       margin: 0 auto;
+       padding: 0 2rem;
+   }
+   
+   /* ==========================================================================
+      Navegación Superior (Navbar)
+      ========================================================================== */
+   nav {
+       position: fixed;
+       top: 0;
+       width: 100%;
+       height: var(--nav-height);
+       background: rgba(11, 15, 25, 0.85);
+       backdrop-filter: blur(12px);
+       -webkit-backdrop-filter: blur(12px);
+       border-bottom: 1px solid var(--glass-border);
+       z-index: 1000;
+       display: flex;
+       align-items: center;
+       transition: all 0.3s ease;
+   }
+
+   .nav-container {
+       width: 100%;
+       max-width: 1100px;
+       margin: 0 auto;
+       padding: 0 2rem;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+   }
+
+   .nav-logo {
+       font-family: var(--font-heading);
+       font-size: 1.5rem;
+       font-weight: 700;
+       color: #fff;
+       text-decoration: none;
+       display: flex;
+       align-items: center;
+       gap: 10px;
+   }
+
+   .nav-links {
+       display: flex;
+       gap: 2rem;
+       list-style: none;
+   }
+
+   .nav-links a {
+       color: var(--text-main);
+       text-decoration: none;
+       font-weight: 500;
+       transition: color 0.3s;
+       font-family: var(--font-heading);
+   }
+
+   .nav-links a:hover {
+       color: var(--accent-1);
+   }
+
+   /* ==========================================================================
+      Hero Section
+      ========================================================================== */
+   header {
+       padding: calc(6rem + var(--nav-height)) 0 4rem;
+       text-align: center;
+   }
+   
+   header h1 {
+       font-size: 3.5rem;
+       background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       margin-bottom: 1rem;
+       animation: glow 3s ease-in-out infinite alternate;
+   }
+   
+   header p {
+       font-size: 1.25rem;
+       color: var(--text-muted);
+       max-width: 700px;
+       margin: 0 auto 2.5rem;
+   }
+   
+   .btn {
+       display: inline-block;
+       padding: 1rem 2.5rem;
+       background: rgba(45, 212, 191, 0.1);
+       color: var(--accent-1);
+       border: 1px solid var(--accent-1);
+       border-radius: 8px;
+       text-decoration: none;
+       font-family: var(--font-heading);
+       font-size: 1.1rem;
+       transition: all 0.3s ease;
+       box-shadow: 0 4px 15px rgba(45, 212, 191, 0.15);
+       margin: 0 10px;
+   }
+   
+   .btn:hover {
+       background: var(--accent-1);
+       color: #fff;
+       transform: translateY(-2px);
+       box-shadow: 0 8px 25px rgba(45, 212, 191, 0.4);
+   }
+   
+   /* ==========================================================================
+      Tarjetas Glassmorphism
+      ========================================================================== */
+   main {
+       padding-bottom: 5rem;
+   }
+   
+   .section-title {
+       font-size: 2.2rem;
+       margin-bottom: 2.5rem;
+       text-align: center;
+       position: relative;
+   }
+   
+   .section-title::after {
+       content: '';
+       position: absolute;
+       bottom: -10px;
+       left: 50%;
+       transform: translateX(-50%);
+       width: 60px;
+       height: 3px;
+       background: var(--accent-2);
+       border-radius: 2px;
+   }
+   
+   .card-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+       gap: 2rem;
+       margin-bottom: 4rem;
+   }
+   
+   .glass-card {
+       background: var(--glass-bg);
+       backdrop-filter: blur(16px);
+       -webkit-backdrop-filter: blur(16px);
+       border: 1px solid var(--glass-border);
+       border-radius: 16px;
+       padding: 2.5rem;
+       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   }
+   
+   .glass-card:hover {
+       transform: translateY(-8px);
+       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+       border-color: rgba(56, 189, 248, 0.3);
+   }
+   
+   .glass-card h3 {
+       font-size: 1.5rem;
+       color: #fff;
+       margin-bottom: 1rem;
+       display: flex;
+       align-items: center;
+       gap: 10px;
+   }
+   
+   .glass-card p {
+       color: var(--text-muted);
+       margin-bottom: 1.5rem;
+   }
+   
+   .glass-card ul {
+       list-style: none;
+   }
+   
+   .glass-card ul li {
+       color: var(--text-muted);
+       margin-bottom: 0.8rem;
+       padding-left: 1.8rem;
+       position: relative;
+   }
+   
+   .glass-card ul li::before {
+       content: '▹';
+       position: absolute;
+       left: 0;
+       color: var(--accent-2);
+       font-weight: bold;
+       font-size: 1.2rem;
+   }
+   
+   /* ==========================================================================
+      Footer y Utilitarios
+      ========================================================================== */
+   .code-block {
+       background: rgba(0, 0, 0, 0.4);
+       padding: 1.5rem;
+       border-radius: 8px;
+       border: 1px solid var(--glass-border);
+       color: #e2e8f0;
+       font-family: monospace;
+       margin-top: 1.5rem;
+       text-align: center;
+   }
+   
+   footer {
+       text-align: center;
+       padding: 3rem 0;
+       border-top: 1px solid var(--glass-border);
+   }
+   
+   @keyframes glow {
+       from { text-shadow: 0 0 10px rgba(45, 212, 191, 0.2); }
+       to { text-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+   }

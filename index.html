@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inge Datos - Sector Minero Energético de Colombia</title>
+    <meta name="description" content="Dashboard y análisis de datos en el sector energético">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">⚡ IngeDatos</a>
+            <ul class="nav-links">
+                <li><a href="#proceso">Proceso ETL</a></li>
+                <li><a href="#orquestacion">Orquestación</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Sector Minero-Energético Colombia</h1>
+            <p>Un recorrido exhaustivo por el flujo de trabajo (ETL), análisis descriptivo e interactivo implementado sobre métricas de la industria energética de Colombia en nuestro proyecto <strong>Parcial Inge</strong>.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#proceso" class="btn">Ver el Análisis</a>
+                <a href="#dashboard" class="btn" style="background: var(--accent-2); color: #fff; border-color: var(--accent-2);">Explorar Dashboard UI</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <h2 class="section-title" id="proceso">Flujo Integral de los Datos</h2>
+
+        <div class="card-grid">
+            <!-- Paso 1 -->
+            <div class="glass-card">
+                <h3>1. Ingesta desde SQLite</h3>
+                <p>Nuestra infraestructura central está fundamentada en una base de datos relacional local exportada como CSV.</p>
+                <ul>
+                    <li>Conexión mediante librería Python <code>sqlite3</code></li>
+                    <li>Creación programática de la BDD a través de scripts SQL (`.sql`)</li>
+                    <li>Importación de tablas críticas: Inversiones, Proyectos y Empresas.</li>
+                </ul>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="glass-card">
+                <h3>2. Exploración (EDA)</h3>
+                <p>Análisis enfocado en entender la integridad atómica y el esquema macro de las fuentes.</p>
+                <ul>
+                    <li>Detección de tipologías (Int, Float, Object) y revisión nula.</li>
+                    <li>Comportamiento de la dispersión de datos.</li>
+                    <li>Confirmación de integridad relacional (Claves foráneas y primarias).</li>
+                </ul>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="glass-card">
+                <h3>3. Conformación del Data Warehouse</h3>
+                <p>Normalización en formato de consultas Dataframe empleando el ORM visual de <code>pandas</code>.</p>
+                <ul>
+                    <li>Intersecciones multivariables mediante joins exhaustivos (<code>merge()</code>).</li>
+                    <li>Saneamiento de redundancias (limpieza exhaustiva de claves superpuestas).</li>
+                    <li>Desnormailización final: Un consolidado central analítico robusto.</li>
+                </ul>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="glass-card">
+                <h3>4. Insights y Consultas SQL</h3>
+                <p>Se resolvió la algoritmia y peticiones de la fase inicial mapeando métricas claves del negocio.</p>
+                <ul>
+                    <li>Sumatorias de inversión por categorización tecnológica en USD.</li>
+                    <li>Patrones sociodemográficos de ubicación de refinerías o plantas (Eólica, Fotovoltaica).</li>
+                    <li>Predicción basada en cruces algorítmicos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="orquestacion">Orquestación de Datos: Airflow & Docker</h2>
+        
+        <div class="glass-card" style="margin-bottom: 4rem;">
+            <h3>Sinergia entre Apache Airflow y Docker para flujos ETL</h3>
+            <p style="margin-bottom: 1.5rem;">La integración de <strong>Apache Airflow</strong> y <strong>Docker</strong> es el estándar de la industria para garantizar pipelines de datos robustos, escalables y reproducibles. Mientras que Docker aísla las dependencias del ecosistema analítico en contenedores ligeros (como la BD o el Dashboard), Airflow orquesta, monitoriza e inicializa estos procesos secuencialmente de forma automatizada para todo el flujo Extract-Transform-Load.</p>
+            
+            <div style="margin-top: 2rem; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+                <h4 style="text-align: center; margin-bottom: 1.5rem; color: var(--accent-1); font-family: var(--font-heading);">Diagrama Lógico de Arquitectura</h4>
+                <div class="mermaid" style="display: flex; justify-content: center;">
+                    graph TD
+                    subgraph Docker_Ecosystem ["Entorno Contenerizado (Docker)"]
+                        DB[(Base de Datos SQLite)] 
+                        APP[Streamlit Dashboard]
+                    end
+                    
+                    subgraph Airflow_Orchestration ["Apache Airflow Orchestrator"]
+                        DAG[DAG - Pipeline ETL]
+                        T1(Extracción de Datos)
+                        T2(Transformación y Limpieza)
+                        T3(Carga a Data Warehouse)
+                        
+                        DAG --> T1
+                        T1 --> T2
+                        T2 --> T3
+                    end
+                    
+                    DB -.-> |Consultas de Origen| T1
+                    T3 -.-> |Datos Listos y Consolidados| APP
+                    
+                    classDef docker fill:#0b1e36,stroke:#38bdf8,stroke-width:2px,color:#fff;
+                    classDef airflow fill:#1f2937,stroke:#2dd4bf,stroke-width:2px,color:#fff;
+                    class Docker_Ecosystem docker;
+                    class Airflow_Orchestration airflow;
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="dashboard">Implementación del Dashboard Streamlit</h2>
+        
+        <div class="glass-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h3>De Scripts Consolidados a Plataforma Inteligente</h3>
+            <p style="text-align: left; margin-bottom: 20px;">Utilizando todo el potencial de la consolidación descrita previamente, se orquestó la aplicación robusta para visualización utilizando Streamlit. Esta aplicación ofrece capacidades pre-entrenadas predictivas y representación geoestratégica, reduciendo la fricción generada por el Jupyter Notebook original pre-creado.</p>
+            
+            <div class="code-block">
+                pip install -r requirements.txt<br>
+                streamlit run app.py
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-muted); margin-bottom: 15px;">Parcial Ingeniería de Datos</p>
+            <div>
+                <a href="https://github.com/ErikSantiago-G/Parcial-Inge.git" target="_blank" style="text-decoration: none;">
+                    <img src="https://img.shields.io/badge/GitHub-Repo-181717?logo=github&logoColor=white" alt="GitHub Repository">
+                </a>
+                <span style="margin-left: 10px;">
+                    <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit">
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>
